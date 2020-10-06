@@ -1,0 +1,15 @@
+#Ignora carpeta possible en directori test
+/_test/**/*
+/_test/*
+
+/.idea/*
+!/.idea/runConfigurations/
+!/.idea/runConfigurations/*
+
+
+/venv/**/*
+/venv/*
+
+# Ignora carpeta lib
+/lib/**/*
+/lib/*

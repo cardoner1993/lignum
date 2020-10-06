@@ -1,0 +1,10 @@
+#Ignora carpeta possible en directori test
+/_test/**/*
+/_test/*
+
+#Ignora carpeta .idea de pycharm
+/.idea/*
+/.idea/*
+
+/venv/**/*
+/venv/*

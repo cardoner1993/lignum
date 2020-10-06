@@ -1,0 +1,54 @@
+stages:
+  - build_latest
+  - build_realse
+  - build_test_images
+build_latest_image:
+  stage: build_latest
+  image: docker:git
+  services:
+    - docker:dind
+  variables:
+      DOCKER_DRIVER: overlay  
+      IMAGE_TAG: $CI_REGISTRY_IMAGE:latest
+  script:
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/analytics-lgnm/lib/python.git lib/python
+    - ls
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build --pull -t $IMAGE_TAG -t latest -f Dockerfile .
+    - docker push $IMAGE_TAG
+  only:
+      - master
+
+build_relase_image:
+  stage: build_realse
+  image: docker:git
+  services:
+    - docker:dind
+  variables:
+      DOCKER_DRIVER: overlay
+      IMAGE_TAG: $CI_REGISTRY_IMAGE:0.0.1
+  script:
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/analytics-lgnm/lib/python.git lib/python
+    - ls
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build --pull -t $IMAGE_TAG -t latest -f Dockerfile .
+    - docker push $IMAGE_TAG
+  only:
+      - relase
+
+test_images:
+  stage: build_test_images
+  image: docker:git
+  services:
+    - docker:dind
+  variables:
+      DOCKER_DRIVER: overlay
+      IMAGE_TAG: $CI_REGISTRY_IMAGE:test
+  script:
+    - git clone -b refactor --single-branch https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/analytics-lgnm/lib/python.git lib/python
+    - ls
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build --pull -t $IMAGE_TAG -t latest -f Dockerfile .
+    - docker push $IMAGE_TAG
+  only:
+    - lib-refactor

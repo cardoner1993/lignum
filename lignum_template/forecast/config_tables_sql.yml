@@ -1,0 +1,75 @@
+---
+tables:
+    seas_decomposition_mars_weather_deduplicated:
+        columns:
+            - time
+            - serie
+            - season
+            - trend
+            - residual
+            - insertion_time
+        types:
+            - datetime
+            - float
+            - float
+            - float
+            - float
+            - datetime
+        primary_key_flag:
+            - True
+            - False
+            - False
+            - False
+            - False
+            - False
+        nullable_flag:
+            - False
+            - True
+            - True
+            - True
+            - True
+            - False
+        index:
+            - time
+        unique: True
+
+    forecast_mars_weather_deduplicated_additive:
+        columns:
+            - time
+            - yhat_lower
+            - yhat
+            - yhat_upper
+            - additive_terms
+            - additive_terms_lower
+            - additive_terms_upper
+            - insertion_time
+        types:
+            - datetime
+            - float
+            - float
+            - float
+            - float
+            - float
+            - float
+            - datetime
+        primary_key_flag:
+            - True
+            - False
+            - False
+            - False
+            - False
+            - False
+            - False
+            - False
+        nullable_flag:
+            - False
+            - True
+            - True
+            - True
+            - True
+            - True
+            - True
+            - False
+        index:
+            - time
+        unique: True

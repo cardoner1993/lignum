@@ -1,0 +1,22 @@
+--- #TODO: Remove values from that file it could be set by env vars
+dev:
+  elastic:
+    host: 10.152.183.94
+    port: 9200
+    user: None
+    password: None
+    index: lignoom_analytics
+  sqlserver_read:
+    engine: sql_server
+    host: 95.216.3.217
+    port: 1433
+    user: ds
+    password: S4m99fDD
+    database: ds
+  sqlserver_write:
+    engine: sql_server
+    host: 95.216.3.217
+    port: 1433
+    user: fs
+    password: hc1peRbq
+    database: app
